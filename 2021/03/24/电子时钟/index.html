@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/sudo-li/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/sudo-li/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/sudo-li/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/sudo-li/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/sudo-li/css/main.css">
+
+
+<link rel="stylesheet" href="/sudo-li/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sudo-li.gitee.io","root":"/sudo-li/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="#基于stc51单片机的电子时钟设计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电子时钟">
+<meta property="og:url" content="https://sudo-li.gitee.io/sudo-li/2021/03/24/%E7%94%B5%E5%AD%90%E6%97%B6%E9%92%9F/index.html">
+<meta property="og:site_name" content="sudo-li">
+<meta property="og:description" content="#基于stc51单片机的电子时钟设计">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200219130449685.JPG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeXVueHVsaQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200219130631692.JPG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeXVueHVsaQ==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-03-24T02:55:29.241Z">
+<meta property="article:modified_time" content="2021-03-18T07:16:00.205Z">
+<meta property="article:author" content="sudo-li">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200219130449685.JPG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeXVueHVsaQ==,size_16,color_FFFFFF,t_70">
+
+<link rel="canonical" href="https://sudo-li.gitee.io/sudo-li/2021/03/24/%E7%94%B5%E5%AD%90%E6%97%B6%E9%92%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>电子时钟 | sudo-li</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/sudo-li/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">sudo-li</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Follow your heart and achieve yourself</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/sudo-li/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/sudo-li/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/sudo-li/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/sudo-li/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sudo-li.gitee.io/sudo-li/2021/03/24/%E7%94%B5%E5%AD%90%E6%97%B6%E9%92%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/sudo-li/images/head2.jpg">
+      <meta itemprop="name" content="sudo-li">
+      <meta itemprop="description" content="Welcome to sudo-li personal blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sudo-li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          电子时钟
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-24 10:55:29" itemprop="dateCreated datePublished" datetime="2021-03-24T10:55:29+08:00">2021-03-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-18 15:16:00" itemprop="dateModified" datetime="2021-03-18T15:16:00+08:00">2021-03-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>#基于stc51单片机的电子时钟设计</p>
+<span id="more"></span>
+
+<p><strong>以下内容均个人所写仅供参考，如有错误欢迎指正，欢迎大家交流学习。纯属个人分享 不喜勿喷。谢谢</strong></p>
+<h2 id="1-系统功能简介"><a href="#1-系统功能简介" class="headerlink" title="1.系统功能简介"></a>1.系统功能简介</h2><h3 id="1-1硬件介绍"><a href="#1-1硬件介绍" class="headerlink" title="1.1硬件介绍"></a>1.1硬件介绍</h3><p>  本系统由ds1302时钟芯片产生时基掉电可用后备电源不影响时间准确<a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/1c014a0616fc700abb68fc45.html">关于ds1302</a>，蜂鸣器用于闹钟（也可用温度报警本系统没有），ds18b20数字温度传感器用于检测环境温度<a target="_blank" rel="noopener" href="http://www.21ic.com/jichuzhishi/datasheet/DS18B20/data/187578.html">关于ds18b20</a>，24c02芯片是IIC时序的存储器用于存储用户信息，整个系统的显示用的是LCD12864（串口的）,整个系统均由stc90c516协调控制。</p>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ul>
+<li>可按键调整时间</li>
+<li>能显示精确温度</li>
+<li>可设置当前时间24小时以内的闹钟</li>
+<li>ds1302电路<br><img src="https://img-blog.csdnimg.cn/20200219130449685.JPG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeXVueHVsaQ==,size_16,color_FFFFFF,t_70" alt="注意：ds1302内置匹配电容6pf所以X1晶振要买6pf的晶振"></li>
+<li>24c02电路<br><img src="https://img-blog.csdnimg.cn/20200219130631692.JPG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeXVueHVsaQ==,size_16,color_FFFFFF,t_70" alt="1,2，3引脚为IIC地址信号线要加4.7K上拉电阻"></li>
+<li>完整电路图和PCB<code>见文末</code><h2 id="2-程序"><a href="#2-程序" class="headerlink" title="2.程序"></a>2.程序</h2>运行环境win10  keil5<br>由于代码量过大这里主要介绍主函数和按键功能实现函数其余代码<code>见文末</code></li>
+<li><strong>main.h</strong>，引入标准头文件和数据类型重命名</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _MAIN_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _MAIN_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;reg52.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;intrins.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uchar unsigned char</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uint unsigned int 	</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ulong unsigned long</span></span><br><span class="line">	</span><br><span class="line">sbit beep = P1^<span class="number">5</span>;<span class="comment">//蜂鸣器控制引脚定义</span></span><br><span class="line">	</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ds1302init 0   <span class="comment">//ds1302初始化时间标志</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Delay10ms</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> c)</span></span>;<span class="comment">//10ms延时</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>main.c</strong></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;main.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;lcd.h&quot;</span>			<span class="comment">//显示头文件</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;ds1302.h&quot;</span>			<span class="comment">//温度传感器</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;24c02.h&quot;</span>			<span class="comment">//存储</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;ds18b20.h&quot;</span>		<span class="comment">//时钟</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;key.h&quot;</span>			<span class="comment">//按键</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Delay10ms</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> a,b;</span><br><span class="line">    <span class="keyword">for</span>(;c&gt;<span class="number">0</span>;c--)</span><br><span class="line">        <span class="keyword">for</span>(b=<span class="number">38</span>;b&gt;<span class="number">0</span>;b--)</span><br><span class="line">            <span class="keyword">for</span>(a=<span class="number">130</span>;a&gt;<span class="number">0</span>;a--);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;	 </span><br><span class="line">	uchar b = <span class="number">50</span>,n=<span class="number">10</span>;</span><br><span class="line">	TMOD|=<span class="number">0X01</span>;							<span class="comment">//选择为定时器0模式，工作方式1，仅用TR0打开启动。</span></span><br><span class="line">	TH0 = <span class="number">0xff</span>;</span><br><span class="line">	TL0 = <span class="number">0x9c</span>;</span><br><span class="line">	ET0 = <span class="number">1</span>;</span><br><span class="line">	EA = <span class="number">1</span>;										<span class="comment">//使用定时器0中断</span></span><br><span class="line">	Init_lcd();</span><br><span class="line">	<span class="meta">#<span class="meta-keyword">if</span> ds1302init 								<span class="comment">//是否初始化时间</span></span></span><br><span class="line">		Init_ds1302();</span><br><span class="line">	<span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">	clear_all();</span><br><span class="line">	display_graphic_8x16(<span class="number">1</span>,<span class="number">1</span>,&amp;num[<span class="number">2</span>][<span class="number">0</span>]);</span><br><span class="line">	display_graphic_8x16(<span class="number">1</span>,<span class="number">8</span>,&amp;num[<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">	display_graphic_8x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">12</span>,O);</span><br><span class="line">	display_graphic_8x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">13</span>,F);</span><br><span class="line">	display_graphic_8x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">14</span>,F);</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		At24c02Write(<span class="number">1</span>,<span class="number">0x00</span>);</span><br><span class="line">		<span class="keyword">if</span>(At24c02Read(<span class="number">1</span>) == <span class="number">0x00</span>)</span><br><span class="line">			display_graphic_16x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">14</span>,ri);</span><br><span class="line">		Key_Function(Key_Read()); 					<span class="comment">//按键读取函数并实现相应功能</span></span><br><span class="line">		<span class="keyword">if</span>(n == <span class="number">10</span>) 								<span class="comment">//延时控制</span></span><br><span class="line">		&#123;</span><br><span class="line">			time_display();  						 <span class="comment">//时间显示函数</span></span><br><span class="line">			n=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(b == <span class="number">50</span>) 								<span class="comment">//延时控制</span></span><br><span class="line">		&#123;</span><br><span class="line">			Ds18b20_display(Ds18b20ReadTemp());     <span class="comment">//温度显示函数</span></span><br><span class="line">			b=<span class="number">0</span>;		</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(clock[<span class="number">2</span>] == <span class="number">0x01</span>) 						<span class="comment">//判断闹钟标志</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(Alarm_clock[<span class="number">0</span>] == time[<span class="number">2</span>])    		<span class="comment">//检查闹钟是否到时</span></span><br><span class="line">			&#123;			</span><br><span class="line">				<span class="keyword">if</span>(Alarm_clock[<span class="number">1</span>] == time[<span class="number">1</span>])</span><br><span class="line">				&#123;</span><br><span class="line">					TR0 = <span class="number">1</span>;  						<span class="comment">//开启定时器0</span></span><br><span class="line">					clear_8x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">13</span>);</span><br><span class="line">					display_graphic_8x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">13</span>,F);</span><br><span class="line">					display_graphic_8x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">14</span>,F);</span><br><span class="line">					clear_8x16(<span class="number">5</span>,<span class="number">8</span>*<span class="number">3</span>);</span><br><span class="line">					clear_8x16(<span class="number">5</span>,<span class="number">8</span>*<span class="number">4</span>);</span><br><span class="line">					clear_8x16(<span class="number">5</span>,<span class="number">8</span>*<span class="number">5</span>);</span><br><span class="line">					clear_8x16(<span class="number">5</span>,<span class="number">8</span>*<span class="number">6</span>);</span><br><span class="line">					clear_8x16(<span class="number">5</span>,<span class="number">8</span>*<span class="number">7</span>);</span><br><span class="line">					clock[<span class="number">2</span>] = <span class="number">0x00</span>;</span><br><span class="line">					clock[<span class="number">0</span>] = <span class="number">0x00</span>;</span><br><span class="line">					clock[<span class="number">1</span>] = <span class="number">0x00</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		Delay10ms(<span class="number">1</span>);</span><br><span class="line">		b++;</span><br><span class="line">		n++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Timer0</span><span class="params">()</span> interrupt 1  		<span class="comment">//中断服务函数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> uint i;</span><br><span class="line">	TH0=<span class="number">0xff</span>;	</span><br><span class="line">	TL0=<span class="number">0x9c</span>;</span><br><span class="line">	beep = ~beep;				<span class="comment">//蜂鸣器</span></span><br><span class="line">	i++;</span><br><span class="line">	<span class="keyword">if</span>(i==<span class="number">15000</span>)   				<span class="comment">//可调整想多长时间</span></span><br><span class="line">	&#123;</span><br><span class="line">		i=<span class="number">0</span>;</span><br><span class="line">		TR0 = <span class="number">0</span>;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>key.h</strong></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _KEY_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _KEY_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;main.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">sbit ADD = P3^<span class="number">2</span>;  		<span class="comment">//加</span></span><br><span class="line">sbit RED = P3^<span class="number">3</span>;		<span class="comment">//减		</span></span><br><span class="line">sbit ALARM = P3^<span class="number">4</span>;		<span class="comment">//闹钟</span></span><br><span class="line">sbit SET = P3^<span class="number">5</span>;		<span class="comment">//设置</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ADD_1	1		<span class="comment">//加返回值</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RED_2	2		<span class="comment">//减返回值</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ALARM_3	3		<span class="comment">//闹钟返回值</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SET_4	4		<span class="comment">//设置返回值</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> uchar clock[<span class="number">3</span>];			<span class="comment">//clock[0]接收小时数据  clock[1]接收分钟数据 clock[2]是进入闹钟标志</span></span><br><span class="line"><span class="keyword">extern</span> uchar Alarm_clock[<span class="number">2</span>];	<span class="comment">//闹钟的时，分</span></span><br><span class="line"></span><br><span class="line"><span class="function">uchar <span class="title">Key_Read</span><span class="params">(<span class="keyword">void</span>)</span></span>;			<span class="comment">//读取按键值的函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Key_Function</span><span class="params">(uchar temp)</span></span>;	<span class="comment">//根据按键值实现功能的函数</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>key.c</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;key.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;lcd.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;ds1302.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;24c02.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">uchar clock[<span class="number">3</span>];  		<span class="comment">//clock[0]接收小时数据  clock[1]接收分钟数据 clock[2]是进入闹钟标志</span></span><br><span class="line">uchar Alarm_clock[<span class="number">2</span>]; 	<span class="comment">//闹钟的时，分</span></span><br><span class="line"></span><br><span class="line"><span class="function">uchar <span class="title">Key_Read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>((ADD == <span class="number">0</span>) || (RED == <span class="number">0</span>) || (ALARM == <span class="number">0</span>) || (SET) == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		Delay10ms(<span class="number">1</span>); 	<span class="comment">//延时去抖动</span></span><br><span class="line">		<span class="keyword">if</span>(ADD == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">while</span>(!ADD);</span><br><span class="line">			<span class="keyword">return</span> ADD_1;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(RED == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">while</span>(!RED);</span><br><span class="line">			<span class="keyword">return</span> RED_2;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(ALARM == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">while</span>(!ALARM);</span><br><span class="line">			<span class="keyword">return</span> ALARM_3;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(SET == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">while</span>(!SET);</span><br><span class="line">			<span class="keyword">return</span> SET_4;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">//如果无则返回0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/********************************************************</span></span><br><span class="line"><span class="comment">数值加一函数</span></span><br><span class="line"><span class="comment">参数一用于按键检查 如果检查不对直接退出函数</span></span><br><span class="line"><span class="comment">参数二用于修改那个时间比如 i=1 则修改年，i=2 则修改月 以此类推</span></span><br><span class="line"><span class="comment">time全局外部数组 在ds1303.c中定义，顺序是 秒，分，时，日，月，星期，年</span></span><br><span class="line"><span class="comment">无返回值</span></span><br><span class="line"><span class="comment">*************************************************************/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span>  <span class="title">Add_one</span><span class="params">(uchar temp,uchar i)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(temp == ADD_1)<span class="comment">//加一</span></span><br><span class="line">	&#123;</span><br><span class="line">		Write_ds1302(<span class="number">0x8e</span>,<span class="number">0x00</span>);	<span class="comment">//关闭写保护</span></span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>((time[<span class="number">6</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x09</span>)  <span class="comment">//判断是否需要进位 比如19到20  以下均是</span></span><br><span class="line">			&#123;</span><br><span class="line">				time[<span class="number">6</span>] &gt;&gt;= <span class="number">4</span>;  </span><br><span class="line">				time[<span class="number">6</span>] ++;</span><br><span class="line">				time[<span class="number">6</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">6</span>]++;</span><br><span class="line">			Write_ds1302(<span class="number">0x8c</span>,time[<span class="number">6</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">2</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>((time[<span class="number">4</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x09</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				time[<span class="number">4</span>] &gt;&gt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">4</span>] ++;</span><br><span class="line">				time[<span class="number">4</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">4</span>]++;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">4</span>] == <span class="number">0x13</span>)</span><br><span class="line">				time[<span class="number">4</span>] = <span class="number">0x01</span>;</span><br><span class="line">			Write_ds1302(<span class="number">0x88</span>,time[<span class="number">4</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">3</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>((time[<span class="number">3</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x09</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				time[<span class="number">3</span>] &gt;&gt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">3</span>] ++;</span><br><span class="line">				time[<span class="number">3</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">3</span>]++;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">3</span>] == <span class="number">0x32</span>)</span><br><span class="line">				time[<span class="number">3</span>] = <span class="number">0x01</span>;</span><br><span class="line">			Write_ds1302(<span class="number">0x86</span>,time[<span class="number">3</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">4</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			time[<span class="number">5</span>]++;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">5</span>] == <span class="number">0x08</span>)</span><br><span class="line">				time[<span class="number">5</span>] = <span class="number">0x01</span>;</span><br><span class="line">			Write_ds1302(<span class="number">0x8a</span>,time[<span class="number">5</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">5</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>((time[<span class="number">2</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x09</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				time[<span class="number">2</span>] &gt;&gt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">2</span>] ++;</span><br><span class="line">				time[<span class="number">2</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">2</span>]++;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">2</span>] == <span class="number">0x24</span>)</span><br><span class="line">				time[<span class="number">2</span>] = <span class="number">0x00</span>;</span><br><span class="line">			Write_ds1302(<span class="number">0x84</span>,time[<span class="number">2</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">6</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>((time[<span class="number">1</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x09</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				time[<span class="number">1</span>] &gt;&gt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">1</span>] ++;</span><br><span class="line">				time[<span class="number">1</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">1</span>]++;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">1</span>] == <span class="number">0x60</span>)</span><br><span class="line">				time[<span class="number">1</span>] = <span class="number">0x00</span>;</span><br><span class="line">			Write_ds1302(<span class="number">0x82</span>,time[<span class="number">1</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">7</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>((time[<span class="number">0</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x09</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				time[<span class="number">0</span>] &gt;&gt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">0</span>] ++;</span><br><span class="line">				time[<span class="number">0</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">0</span>]++;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">0</span>] == <span class="number">0x60</span>)</span><br><span class="line">				time[<span class="number">0</span>] = <span class="number">0x00</span>;</span><br><span class="line">			Write_ds1302(<span class="number">0x80</span>,time[<span class="number">0</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		Write_ds1302(<span class="number">0x8e</span>,<span class="number">0x80</span>);  <span class="comment">//打开写保护</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/********************************************************</span></span><br><span class="line"><span class="comment">数值减一函数</span></span><br><span class="line"><span class="comment">参数一用于按键检查 如果检查不对直接退出函数</span></span><br><span class="line"><span class="comment">参数二用于修改那个时间比如 i=1 则修改年，i=2 则修改月 以此类推</span></span><br><span class="line"><span class="comment">time全局外部数组 在ds1303.c中定义，顺序是 秒，分，时，日，月，星期，年</span></span><br><span class="line"><span class="comment">无返回值</span></span><br><span class="line"><span class="comment">*************************************************************/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Red_one</span><span class="params">(uchar temp,uchar i)</span></span></span><br><span class="line"><span class="function"></span>&#123;		</span><br><span class="line">	<span class="keyword">if</span>(temp == RED_2)</span><br><span class="line">	&#123;</span><br><span class="line">		Write_ds1302(<span class="number">0x8e</span>,<span class="number">0x00</span>);<span class="comment">//关闭写保护</span></span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>((time[<span class="number">6</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x00</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				time[<span class="number">6</span>] &gt;&gt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">6</span>] --;</span><br><span class="line">				time[<span class="number">6</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">6</span>] |= <span class="number">0x09</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">6</span>]--;</span><br><span class="line">			Write_ds1302(<span class="number">0x8c</span>,time[<span class="number">6</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">2</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>((time[<span class="number">4</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x00</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				time[<span class="number">4</span>] &gt;&gt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">4</span>] --;</span><br><span class="line">				time[<span class="number">4</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">4</span>] |= <span class="number">0x09</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">4</span>]--;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">4</span>] == <span class="number">0x00</span>)</span><br><span class="line">				time[<span class="number">4</span>] = <span class="number">0x12</span>;</span><br><span class="line">			Write_ds1302(<span class="number">0x88</span>,time[<span class="number">4</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">3</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>((time[<span class="number">3</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x00</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				time[<span class="number">3</span>] &gt;&gt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">3</span>] --;</span><br><span class="line">				time[<span class="number">3</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">3</span>] |= <span class="number">0x09</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">3</span>]--;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">3</span>] == <span class="number">0x00</span>)</span><br><span class="line">				time[<span class="number">3</span>] = <span class="number">0x31</span>;</span><br><span class="line">			Write_ds1302(<span class="number">0x86</span>,time[<span class="number">3</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">4</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			time[<span class="number">5</span>]--;</span><br><span class="line">			<span class="keyword">if</span>(time[<span class="number">5</span>] == <span class="number">0x00</span>)</span><br><span class="line">				time[<span class="number">5</span>] = <span class="number">0x07</span>;</span><br><span class="line">			Write_ds1302(<span class="number">0x8a</span>,time[<span class="number">5</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">5</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>((time[<span class="number">2</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x00</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				time[<span class="number">2</span>] &gt;&gt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">2</span>] --;</span><br><span class="line">				time[<span class="number">2</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">2</span>] |= <span class="number">0x09</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">2</span>]--;</span><br><span class="line">			Write_ds1302(<span class="number">0x84</span>,time[<span class="number">2</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">6</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>((time[<span class="number">1</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x00</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				time[<span class="number">1</span>] &gt;&gt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">1</span>] --;</span><br><span class="line">				time[<span class="number">1</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">1</span>] |= <span class="number">0x09</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">1</span>]--;</span><br><span class="line">			Write_ds1302(<span class="number">0x82</span>,time[<span class="number">1</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="number">7</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>((time[<span class="number">0</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x00</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				time[<span class="number">0</span>] &gt;&gt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">0</span>] --;</span><br><span class="line">				time[<span class="number">0</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">				time[<span class="number">0</span>] |= <span class="number">0x09</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				time[<span class="number">0</span>]--;</span><br><span class="line">			Write_ds1302(<span class="number">0x80</span>,time[<span class="number">0</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		Write_ds1302(<span class="number">0x8e</span>,<span class="number">0x80</span>);  <span class="comment">//打开写保护</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/********************************************************</span></span><br><span class="line"><span class="comment">按键功能实现函数（调整时间，闹钟）</span></span><br><span class="line"><span class="comment">参数一用于检查是哪个功能</span></span><br><span class="line"><span class="comment">无返回值</span></span><br><span class="line"><span class="comment">*************************************************************/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Key_Function</span><span class="params">(uchar temp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> uchar i = <span class="number">0</span>,k = <span class="number">0</span>,filg = <span class="number">1</span>,filg1 = <span class="number">1</span>,j = <span class="number">0</span>,s = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(((k == <span class="number">1</span>) || (temp == SET_4)) &amp;&amp; (filg == <span class="number">1</span>))<span class="comment">//进入设置时间模式</span></span><br><span class="line">	&#123;</span><br><span class="line">		filg1 = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(temp == SET_4)  <span class="comment">//实现调整时间闪烁提示</span></span><br><span class="line">			i++;</span><br><span class="line">		k = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">switch</span>(i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>:clear_8x16(<span class="number">1</span>,<span class="number">8</span>*<span class="number">2</span>); clear_8x16(<span class="number">1</span>,<span class="number">8</span>*<span class="number">3</span>); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>:clear_8x16(<span class="number">1</span>,<span class="number">8</span>*<span class="number">6</span>); clear_8x16(<span class="number">1</span>,<span class="number">8</span>*<span class="number">7</span>); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>:clear_8x16(<span class="number">1</span>,<span class="number">8</span>*<span class="number">10</span>); clear_8x16(<span class="number">1</span>,<span class="number">8</span>*<span class="number">11</span>); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">4</span>:clear_8x16(<span class="number">1</span>,<span class="number">8</span>*<span class="number">15</span>); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">5</span>:clear_8x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">3</span>); clear_8x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">4</span>); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">6</span>:clear_8x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">6</span>); clear_8x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">7</span>); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">7</span>:clear_8x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">9</span>); clear_8x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">10</span>); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">8</span>:i = <span class="number">0</span>; k = <span class="number">0</span>; filg1 = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		Add_one(temp,i);</span><br><span class="line">		Red_one(temp,i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(((s == <span class="number">1</span>) || (temp == ALARM_3)) &amp;&amp; (filg1 == <span class="number">1</span>))<span class="comment">//设置闹钟时间</span></span><br><span class="line">	&#123;</span><br><span class="line">		s = <span class="number">1</span>;</span><br><span class="line">		clock[<span class="number">2</span>] = <span class="number">0x01</span>; <span class="comment">//进入闹钟标志置一</span></span><br><span class="line">		<span class="keyword">if</span>(k == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			</span><br><span class="line">			clock[<span class="number">0</span>] = time[<span class="number">2</span>];</span><br><span class="line">			clock[<span class="number">1</span>] = time[<span class="number">1</span>];</span><br><span class="line">			clear_8x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">13</span>);  <span class="comment">//清除OFF 的前两个字母</span></span><br><span class="line">			clear_8x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">14</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		filg = <span class="number">0</span>;</span><br><span class="line">		k = <span class="number">1</span>;</span><br><span class="line">		display_graphic_8x16(<span class="number">3</span>,<span class="number">8</span>*<span class="number">13</span>,N); <span class="comment">//显示ON</span></span><br><span class="line">		display_graphic_8x16(<span class="number">5</span>,<span class="number">8</span>*<span class="number">3</span>,&amp;num[(clock[<span class="number">0</span>] / <span class="number">16</span>)][<span class="number">0</span>]);</span><br><span class="line">		display_graphic_8x16(<span class="number">5</span>,<span class="number">8</span>*<span class="number">4</span>,&amp;num[(clock[<span class="number">0</span>] &amp; <span class="number">0x0f</span>)][<span class="number">0</span>]);</span><br><span class="line">		display_graphic_8x16(<span class="number">5</span>,<span class="number">8</span>*<span class="number">5</span>,mao_hao);</span><br><span class="line">		display_graphic_8x16(<span class="number">5</span>,<span class="number">8</span>*<span class="number">6</span>,&amp;num[(clock[<span class="number">1</span>] / <span class="number">16</span>)][<span class="number">0</span>]);</span><br><span class="line">		display_graphic_8x16(<span class="number">5</span>,<span class="number">8</span>*<span class="number">7</span>,&amp;num[(clock[<span class="number">1</span>] &amp; <span class="number">0x0f</span>)][<span class="number">0</span>]);</span><br><span class="line">		<span class="keyword">if</span>(temp == SET_4)  <span class="comment">//计数按了几次</span></span><br><span class="line">			j++;</span><br><span class="line">		<span class="keyword">switch</span>(j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>:clear_8x16(<span class="number">5</span>,<span class="number">8</span>*<span class="number">3</span>);clear_8x16(<span class="number">5</span>,<span class="number">8</span>*<span class="number">4</span>);<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>:clear_8x16(<span class="number">5</span>,<span class="number">8</span>*<span class="number">6</span>);clear_8x16(<span class="number">5</span>,<span class="number">8</span>*<span class="number">7</span>);<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>:filg = <span class="number">1</span>; s = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(j == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(temp == ADD_1)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>((clock[<span class="number">0</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x09</span>) <span class="comment">//判断是否需要进位 比如19到20</span></span><br><span class="line">				&#123;</span><br><span class="line">					clock[<span class="number">0</span>] &gt;&gt;= <span class="number">4</span>;</span><br><span class="line">					clock[<span class="number">0</span>] ++;</span><br><span class="line">					clock[<span class="number">0</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">					clock[<span class="number">0</span>]++;</span><br><span class="line">			&#125;			</span><br><span class="line">			<span class="keyword">if</span>(temp == RED_2)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>((clock[<span class="number">0</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x00</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					clock[<span class="number">0</span>] &gt;&gt;= <span class="number">4</span>;</span><br><span class="line">					clock[<span class="number">0</span>] --;</span><br><span class="line">					clock[<span class="number">0</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">					clock[<span class="number">0</span>] |= <span class="number">0x09</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">					clock[<span class="number">0</span>]--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(j == <span class="number">2</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(temp == ADD_1)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>((clock[<span class="number">1</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x09</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					clock[<span class="number">1</span>] &gt;&gt;= <span class="number">4</span>;</span><br><span class="line">					clock[<span class="number">1</span>] ++;</span><br><span class="line">					clock[<span class="number">1</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">					clock[<span class="number">1</span>]++;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">if</span>(temp == RED_2)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>((clock[<span class="number">1</span>] &amp; <span class="number">0x0f</span>) == <span class="number">0x00</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					clock[<span class="number">1</span>] &gt;&gt;= <span class="number">4</span>;</span><br><span class="line">					clock[<span class="number">1</span>] --;</span><br><span class="line">					clock[<span class="number">1</span>] &lt;&lt;= <span class="number">4</span>;</span><br><span class="line">					clock[<span class="number">1</span>] |= <span class="number">0x09</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">					clock[<span class="number">1</span>]--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(j == <span class="number">3</span>) <span class="comment">//表示设置闹钟完成 设置值存入全局数组</span></span><br><span class="line">		&#123;</span><br><span class="line">			Alarm_clock[<span class="number">1</span>] = clock[<span class="number">1</span>];</span><br><span class="line">			Alarm_clock[<span class="number">0</span>] = clock[<span class="number">0</span>];</span><br><span class="line">			j = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>下面我对以上代码思路做简单介绍。如要所有代码<code>见文末</code></strong></p>
+<p>   程序采用C语言的模块化思想把功能封装成函数，主函数主要实现所用硬件的初始化定时器中断和所有需要显示到LCD上的内容。ds1302初始时间只需要设置一次因为掉电程序会重新运行但是时间掉电也会运行所以时间不需要初始化我们采用条件编译来实现。ds1302读回来的时间放在一个可供所有文件使用的全局数组<code>time</code>里。<br>  key.c主要介绍按键功能实现的函数这个函数实现两个功能调整时间和设置闹钟时间（最好把这两个功能写成两个独立的函数，也不知道当时我是咋想的☹☹）进入设置后利用加一减一函数实现加减在通过time数组写给ds1302就能够设置时间，关于怎么知道你当前设置的是那一个时间我用了局部清屏之后在写然后在局部清屏实现局部屏幕闪烁提示用户当前正在修改那个时间。</p>
+<hr>
+<p>  （<strong>最会说一下该程序的bug第一次开机必须先按下设置时间键才能按下闹钟键否则按下闹钟键没反应我实在是写吐了如有大神谢谢指点</strong>）<br>请点击<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1lFCvCxWeM8TZdQaGqZYlhA">源码+原理图+pcb</a>提取码w1kb</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>你的支持是对我最大的帮助</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/sudo-li/images/weixin.png" alt="sudo-li 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/sudo-li/images/zhifubao.jpg" alt="sudo-li 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/sudo-li/2021/03/23/test/" rel="prev" title="test">
+      <i class="fa fa-chevron-left"></i> test
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/sudo-li/2021/03/24/ubuntu20.04%E7%BE%8E%E5%8C%96/" rel="next" title="Ubuntu20.04美化过程">
+      Ubuntu20.04美化过程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1.系统功能简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1%E7%A1%AC%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">1.1硬件介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.</span> <span class="nav-text">功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.</span> <span class="nav-text">2.程序</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="sudo-li"
+      src="/sudo-li/images/head2.jpg">
+  <p class="site-author-name" itemprop="name">sudo-li</p>
+  <div class="site-description" itemprop="description">Welcome to sudo-li personal blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/sudo-li/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/sudo-li/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/sudo-li/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sudo-li" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sudo-li" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://gitee.com/sudo-li" title="Gitee → https:&#x2F;&#x2F;gitee.com&#x2F;sudo-li" rel="noopener" target="_blank"><i class="fab fa-git fa-fw"></i>Gitee</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sudo-li</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/sudo-li/lib/anime.min.js"></script>
+  <script src="/sudo-li/lib/velocity/velocity.min.js"></script>
+  <script src="/sudo-li/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/sudo-li/js/utils.js"></script>
+
+<script src="/sudo-li/js/motion.js"></script>
+
+
+<script src="/sudo-li/js/schemes/pisces.js"></script>
+
+
+<script src="/sudo-li/js/next-boot.js"></script>
+
+
+  <script defer src="/sudo-li/lib/three/three.min.js"></script>
+    <script defer src="/sudo-li/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
