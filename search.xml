@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/03/24/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><span id="more"></span>
-<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>test</title>
     <url>/2021/03/23/test/</url>
     <content><![CDATA[<h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h1><p><code>djigegheijrhrh</code></p>
@@ -43,35 +24,23 @@
       </tags>
   </entry>
   <entry>
-    <title>Ubuntu20.04美化过程</title>
-    <url>/2021/03/24/ubuntu20.04%E7%BE%8E%E5%8C%96/</url>
-    <content><![CDATA[<h1 id="Ubuntu美化过程"><a href="#Ubuntu美化过程" class="headerlink" title="Ubuntu美化过程"></a>Ubuntu美化过程</h1><span id="more"></span>
+    <title>Hello World</title>
+    <url>/2021/03/24/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><span id="more"></span>
+<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="Ubuntu美化"><a href="#Ubuntu美化" class="headerlink" title="Ubuntu美化"></a>Ubuntu美化</h1><hr>
-<h2 id="安装必要的软件"><a href="#安装必要的软件" class="headerlink" title="安装必要的软件"></a>安装必要的软件</h2><p>Ubuntu美化有几个必要的软件</p>
-<ul>
-<li>gnome-tweak-tool: 美化工具，设置主题，图标什么的的都在里面</li>
-<li>gnome-shell-extensions: 启用gnome扩展</li>
-<li>chrome-gnome-shell: 使用浏览器安装gnome扩展，不一定非要是chrome浏览器，并且不推荐chrome浏览器，因为需要安装浏览器扩展，而chrome浏览器安装扩展在国内是被404的，所以推荐使用Firefox浏览器<h2 id="系统选择界面的美化（开机的选项界面）"><a href="#系统选择界面的美化（开机的选项界面）" class="headerlink" title="系统选择界面的美化（开机的选项界面）"></a>系统选择界面的美化（开机的选项界面）</h2>在<a href="https://www.gnome-look.org/browse/cat/">gnome look</a>网站上下的Grub Themes 进入目录执行以下命令就可以了<blockquote>
-<p>sudo ./install/sh</p>
-</blockquote>
-<h2 id="图标安装"><a href="#图标安装" class="headerlink" title="图标安装"></a>图标安装</h2>在<a href="https://www.gnome-look.org/browse/cat/">gnome look</a>网站上下的Full Icon Themes标签下现在喜欢的图标，下载完成后解压，将解压的目录放到家目录下的.icons文件夹。（推荐Tela）<h2 id="主题安装"><a href="#主题安装" class="headerlink" title="主题安装"></a>主题安装</h2>在<a href="https://www.gnome-look.org/browse/cat/">gnome look</a>网站上下的GTK3 Themes标签下现在喜欢的主题，下载完成后解压，将解压的目录放到家目录下的.themes文件夹。（推荐Orchis 和 McMojave）<h2 id="鼠标图标安装"><a href="#鼠标图标安装" class="headerlink" title="鼠标图标安装"></a>鼠标图标安装</h2>在<a href="https://www.gnome-look.org/browse/cat/">gnome look</a>网站上下的Cursors标签下现在喜欢的鼠标主题，下载完成后解压，将解压的目录放到系统的icons文件夹(/usr/share/icons)。（推荐Vimix cursors theme）</li>
-</ul>
-<hr>
-<p>这些全都安装完成之后可以打开一个叫优化的软件，也就是我们一开始安装的gnome-tweak-tool，进行一下设置（其中shell设置需要先安装gnome扩展——User themes，详见gnome扩展设置）</p>
-<h2 id="gnome扩展设置"><a href="#gnome扩展设置" class="headerlink" title="gnome扩展设置"></a>gnome扩展设置</h2><p>使用浏览器打开<a href="https://extensions.gnome.org/%EF%BC%8C%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8Firefox%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%8C%E7%82%B9%E5%87%BB%E7%BD%91%E7%AB%99%E4%B8%8A%E7%9A%84**Click">https://extensions.gnome.org/，推荐使用Firefox浏览器，点击网站上的**Click</a> here to install browser extension**，然后按照提示安装浏览器插件。插件安装完成后就可以使用浏览器安装gnome扩展了。<br>我主要安装了以下扩展  </p>
-<ul>
-<li>User Themes 必备插件，让你可以使用用户主题</li>
-<li>dash to dock: 让你拥有跟macos一样的dock栏</li>
-<li>Compiz alike windows effect：让你的窗口像果冻一样</li>
-<li>Remove Alt+Tab Delay: 移除使用alt+tab切换窗口时的0.15秒的延迟，让你切换更加丝滑</li>
-<li>ArcMenu：一个应用程序的菜单，可以选择各种风格的菜单栏</li>
-</ul>
-<p>然后打开extensions软件，可以开关上面安装的gnome extension，或者点击小齿轮进行更加细致的设置。</p>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
-      <tags>
-        <tag>随笔</tag>
-      </tags>
   </entry>
   <entry>
     <title>使用hexo搭建个人博客</title>
@@ -122,6 +91,37 @@
 </li>
 </ol>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Ubuntu20.04美化过程</title>
+    <url>/2021/03/24/ubuntu20.04%E7%BE%8E%E5%8C%96/</url>
+    <content><![CDATA[<h1 id="Ubuntu美化过程"><a href="#Ubuntu美化过程" class="headerlink" title="Ubuntu美化过程"></a>Ubuntu美化过程</h1><span id="more"></span>
+
+<h1 id="Ubuntu美化"><a href="#Ubuntu美化" class="headerlink" title="Ubuntu美化"></a>Ubuntu美化</h1><hr>
+<h2 id="安装必要的软件"><a href="#安装必要的软件" class="headerlink" title="安装必要的软件"></a>安装必要的软件</h2><p>Ubuntu美化有几个必要的软件</p>
+<ul>
+<li>gnome-tweak-tool: 美化工具，设置主题，图标什么的的都在里面</li>
+<li>gnome-shell-extensions: 启用gnome扩展</li>
+<li>chrome-gnome-shell: 使用浏览器安装gnome扩展，不一定非要是chrome浏览器，并且不推荐chrome浏览器，因为需要安装浏览器扩展，而chrome浏览器安装扩展在国内是被404的，所以推荐使用Firefox浏览器<h2 id="系统选择界面的美化（开机的选项界面）"><a href="#系统选择界面的美化（开机的选项界面）" class="headerlink" title="系统选择界面的美化（开机的选项界面）"></a>系统选择界面的美化（开机的选项界面）</h2>在<a href="https://www.gnome-look.org/browse/cat/">gnome look</a>网站上下的Grub Themes 进入目录执行以下命令就可以了<blockquote>
+<p>sudo ./install/sh</p>
+</blockquote>
+<h2 id="图标安装"><a href="#图标安装" class="headerlink" title="图标安装"></a>图标安装</h2>在<a href="https://www.gnome-look.org/browse/cat/">gnome look</a>网站上下的Full Icon Themes标签下现在喜欢的图标，下载完成后解压，将解压的目录放到家目录下的.icons文件夹。（推荐Tela）<h2 id="主题安装"><a href="#主题安装" class="headerlink" title="主题安装"></a>主题安装</h2>在<a href="https://www.gnome-look.org/browse/cat/">gnome look</a>网站上下的GTK3 Themes标签下现在喜欢的主题，下载完成后解压，将解压的目录放到家目录下的.themes文件夹。（推荐Orchis 和 McMojave）<h2 id="鼠标图标安装"><a href="#鼠标图标安装" class="headerlink" title="鼠标图标安装"></a>鼠标图标安装</h2>在<a href="https://www.gnome-look.org/browse/cat/">gnome look</a>网站上下的Cursors标签下现在喜欢的鼠标主题，下载完成后解压，将解压的目录放到系统的icons文件夹(/usr/share/icons)。（推荐Vimix cursors theme）</li>
+</ul>
+<hr>
+<p>这些全都安装完成之后可以打开一个叫优化的软件，也就是我们一开始安装的gnome-tweak-tool，进行一下设置（其中shell设置需要先安装gnome扩展——User themes，详见gnome扩展设置）</p>
+<h2 id="gnome扩展设置"><a href="#gnome扩展设置" class="headerlink" title="gnome扩展设置"></a>gnome扩展设置</h2><p>使用浏览器打开<a href="https://extensions.gnome.org/%EF%BC%8C%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8Firefox%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%8C%E7%82%B9%E5%87%BB%E7%BD%91%E7%AB%99%E4%B8%8A%E7%9A%84**Click">https://extensions.gnome.org/，推荐使用Firefox浏览器，点击网站上的**Click</a> here to install browser extension**，然后按照提示安装浏览器插件。插件安装完成后就可以使用浏览器安装gnome扩展了。<br>我主要安装了以下扩展  </p>
+<ul>
+<li>User Themes 必备插件，让你可以使用用户主题</li>
+<li>dash to dock: 让你拥有跟macos一样的dock栏</li>
+<li>Compiz alike windows effect：让你的窗口像果冻一样</li>
+<li>Remove Alt+Tab Delay: 移除使用alt+tab切换窗口时的0.15秒的延迟，让你切换更加丝滑</li>
+<li>ArcMenu：一个应用程序的菜单，可以选择各种风格的菜单栏</li>
+</ul>
+<p>然后打开extensions软件，可以开关上面安装的gnome extension，或者点击小齿轮进行更加细致的设置。</p>
+]]></content>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
   </entry>
   <entry>
     <title>电子时钟</title>
