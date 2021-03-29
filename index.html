@@ -617,6 +617,422 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sudo-li.gitee.io/2021/03/29/%E8%B4%A8%E6%95%B0%E7%AD%9B%E6%9F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head2.jpg">
+      <meta itemprop="name" content="sudo-li">
+      <meta itemprop="description" content="Welcome to sudo-li personal blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sudo-li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/29/%E8%B4%A8%E6%95%B0%E7%AD%9B%E6%9F%A5/" class="post-title-link" itemprop="url">质数筛查</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-29 17:43:13 / 修改时间：17:57:08" itemprop="dateCreated datePublished" datetime="2021-03-29T17:43:13+08:00">2021-03-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/03/29/%E8%B4%A8%E6%95%B0%E7%AD%9B%E6%9F%A5/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/03/29/%E8%B4%A8%E6%95%B0%E7%AD%9B%E6%9F%A5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>549</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="质数筛查"><a href="#质数筛查" class="headerlink" title="质数筛查"></a>质数筛查</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">1000000</span>;</span><br><span class="line"><span class="keyword">int</span> mark[<span class="number">1000001</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">    <span class="keyword">int</span> m;</span><br><span class="line">    <span class="built_in">memset</span>(mark, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(mark));</span><br><span class="line">    mark[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    mark[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (c = <span class="number">2</span>; c * c &lt;= n; c++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (mark[c] != <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">2</span>; j &lt;= n / c; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                mark[c * j] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = m; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (mark[i] == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于n以内的筛选来说，如果n是和数，c为n的最小正因数，则有</p>
+<blockquote>
+<p>1 &lt;= c &lt;= sqrt(n) = 1 &lt;= pow(c,2) &lt;= n</p>
+</blockquote>
+<p>通过把和数用mark数组标记出来 来筛查质数</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sudo-li.gitee.io/2021/03/29/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head2.jpg">
+      <meta itemprop="name" content="sudo-li">
+      <meta itemprop="description" content="Welcome to sudo-li personal blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sudo-li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/29/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">排序算法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-29 17:43:02 / 修改时间：17:55:25" itemprop="dateCreated datePublished" datetime="2021-03-29T17:43:02+08:00">2021-03-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/03/29/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/03/29/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>357</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="selector-tag">for</span> (m = <span class="number">0</span>; m &lt; n - i - <span class="number">1</span>; m++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="selector-tag">if</span> (numbers[m + <span class="number">1</span>] &gt; numbers[m])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="selector-tag">swap</span>(&amp;numbers[m], &amp;numbers[m + <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h1><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">for (i = <span class="number">0</span>; i &lt; <span class="built_in">n</span> - <span class="number">1</span>; i++)</span><br><span class="line">&#123; </span><br><span class="line">    <span class="built_in">int</span> <span class="built_in">max</span> = i;</span><br><span class="line">    for (m = i + <span class="number">1</span>; m &lt; <span class="built_in">n</span>; m++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">if</span> (numbers[<span class="built_in">max</span>] &lt; numbers[m])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">max</span> = m;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">if</span>(i != <span class="built_in">max</span>)</span><br><span class="line">        swap(&amp;numbers[i], &amp;numbers[<span class="built_in">max</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sudo-li.gitee.io/2021/03/29/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head2.jpg">
+      <meta itemprop="name" content="sudo-li">
+      <meta itemprop="description" content="Welcome to sudo-li personal blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sudo-li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/29/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" class="post-title-link" itemprop="url">二分查找</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-29 17:42:52 / 修改时间：17:56:14" itemprop="dateCreated datePublished" datetime="2021-03-29T17:42:52+08:00">2021-03-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/03/29/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/03/29/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>257</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">while</span>(low &lt;= high)</span><br><span class="line">&#123;</span><br><span class="line">    mid = (low + high) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (numbers[mid] == m)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">printf</span>(<span class="string">&quot;%d&quot;</span>, mid + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (numbers[mid] &lt; m)</span><br><span class="line">    &#123;</span><br><span class="line">        low = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        high = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(low &gt; high)</span><br><span class="line">    <span class="keyword">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sudo-li.gitee.io/2021/03/29/%E7%AC%AC%E4%B8%80%E5%A4%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head2.jpg">
+      <meta itemprop="name" content="sudo-li">
+      <meta itemprop="description" content="Welcome to sudo-li personal blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sudo-li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/29/%E7%AC%AC%E4%B8%80%E5%A4%A9/" class="post-title-link" itemprop="url">第一天</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-29 17:42:29 / 修改时间：17:53:30" itemprop="dateCreated datePublished" datetime="2021-03-29T17:42:29+08:00">2021-03-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/03/29/%E7%AC%AC%E4%B8%80%E5%A4%A9/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/03/29/%E7%AC%AC%E4%B8%80%E5%A4%A9/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>476</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-inttypes-h"><a href="#1-inttypes-h" class="headerlink" title="1.inttypes.h"></a>1.inttypes.h</h1><ul>
+<li>在C99中新添加的头文件  </li>
+<li>新增了 int8_t int16_t int32_t int64_t  </li>
+<li>访问的时候 printf(“%” PRId16,int16_t)  </li>
+<li>新增了INT16_MAX INT16_MIN  <h1 id="2-区分左右值"><a href="#2-区分左右值" class="headerlink" title="2.区分左右值"></a>2.区分左右值</h1></li>
+<li>在程序执行完上一行之后还可以访问的到的就是左值 否则为（中间的临时变量比如a+b产生的临时变量）右值    </li>
+<li>注意从右到左的运算符 （++ – * &amp; ！）  </li>
+</ul>
+<hr>
+<h1 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE"></a>NOTE</h1><ul>
+<li>异或运算是自己的逆运算 a ^ b = c 那么 b = a ^ c a = b ^ c</li>
+<li>异或运算实在统计一个数相关位的奇偶性</li>
+<li>如和让输出最后没有空格 加上 i==0 || printf(“ “);</li>
+<li>如何判断奇偶数的个数 cnt += !(val % 2);  </li>
+<li>c语言中 val % 2 等价于 val &amp; 1  val &amp; 3 = val % 4    val &amp; 7 = val % 8</li>
+<li>C语言运算符运行效率 位运算 &lt; 加减 &lt; 乘 &lt; 除 &lt; 取模</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">&#123;</span><br><span class="line">    j == <span class="number">0</span> || <span class="keyword">printf</span>(<span class="string">&quot; &quot;</span>); <span class="regexp">//</span>在行尾添加空格的方法</span><br><span class="line">    <span class="keyword">printf</span>(<span class="string">&quot;%d&quot;</span>, i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://sudo-li.gitee.io/2021/03/28/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -754,7 +1170,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -809,12 +1225,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">12k</span>
+    <span title="站点总字数">14k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11 分钟</span>
+    <span title="站点阅读时长">13 分钟</span>
 </div>
 
 <!--

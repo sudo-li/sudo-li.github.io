@@ -144,6 +144,66 @@
       </tags>
   </entry>
   <entry>
+    <title>质数筛查</title>
+    <url>/2021/03/29/%E8%B4%A8%E6%95%B0%E7%AD%9B%E6%9F%A5/</url>
+    <content><![CDATA[<h1 id="质数筛查"><a href="#质数筛查" class="headerlink" title="质数筛查"></a>质数筛查</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">1000000</span>;</span><br><span class="line"><span class="keyword">int</span> mark[<span class="number">1000001</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">    <span class="keyword">int</span> m;</span><br><span class="line">    <span class="built_in">memset</span>(mark, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(mark));</span><br><span class="line">    mark[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    mark[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (c = <span class="number">2</span>; c * c &lt;= n; c++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (mark[c] != <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">2</span>; j &lt;= n / c; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                mark[c * j] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = m; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (mark[i] == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于n以内的筛选来说，如果n是和数，c为n的最小正因数，则有</p>
+<blockquote>
+<p>1 &lt;= c &lt;= sqrt(n) = 1 &lt;= pow(c,2) &lt;= n</p>
+</blockquote>
+<p>通过把和数用mark数组标记出来 来筛查质数</p>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>排序算法</title>
+    <url>/2021/03/29/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="selector-tag">for</span> (m = <span class="number">0</span>; m &lt; n - i - <span class="number">1</span>; m++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="selector-tag">if</span> (numbers[m + <span class="number">1</span>] &gt; numbers[m])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="selector-tag">swap</span>(&amp;numbers[m], &amp;numbers[m + <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h1><figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">for (i = <span class="number">0</span>; i &lt; <span class="built_in">n</span> - <span class="number">1</span>; i++)</span><br><span class="line">&#123; </span><br><span class="line">    <span class="built_in">int</span> <span class="built_in">max</span> = i;</span><br><span class="line">    for (m = i + <span class="number">1</span>; m &lt; <span class="built_in">n</span>; m++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">if</span> (numbers[<span class="built_in">max</span>] &lt; numbers[m])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">max</span> = m;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">if</span>(i != <span class="built_in">max</span>)</span><br><span class="line">        swap(&amp;numbers[i], &amp;numbers[<span class="built_in">max</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>二分查找</title>
+    <url>/2021/03/29/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</url>
+    <content><![CDATA[<figure class="highlight perl"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">while</span>(low &lt;= high)</span><br><span class="line">&#123;</span><br><span class="line">    mid = (low + high) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (numbers[mid] == m)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">printf</span>(<span class="string">&quot;%d&quot;</span>, mid + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (numbers[mid] &lt; m)</span><br><span class="line">    &#123;</span><br><span class="line">        low = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        high = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(low &gt; high)</span><br><span class="line">    <span class="keyword">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>第一天</title>
+    <url>/2021/03/29/%E7%AC%AC%E4%B8%80%E5%A4%A9/</url>
+    <content><![CDATA[<h1 id="1-inttypes-h"><a href="#1-inttypes-h" class="headerlink" title="1.inttypes.h"></a>1.inttypes.h</h1><ul>
+<li>在C99中新添加的头文件  </li>
+<li>新增了 int8_t int16_t int32_t int64_t  </li>
+<li>访问的时候 printf(“%” PRId16,int16_t)  </li>
+<li>新增了INT16_MAX INT16_MIN  <h1 id="2-区分左右值"><a href="#2-区分左右值" class="headerlink" title="2.区分左右值"></a>2.区分左右值</h1></li>
+<li>在程序执行完上一行之后还可以访问的到的就是左值 否则为（中间的临时变量比如a+b产生的临时变量）右值    </li>
+<li>注意从右到左的运算符 （++ – * &amp; ！）  </li>
+</ul>
+<hr>
+<h1 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE"></a>NOTE</h1><ul>
+<li>异或运算是自己的逆运算 a ^ b = c 那么 b = a ^ c a = b ^ c</li>
+<li>异或运算实在统计一个数相关位的奇偶性</li>
+<li>如和让输出最后没有空格 加上 i==0 || printf(“ “);</li>
+<li>如何判断奇偶数的个数 cnt += !(val % 2);  </li>
+<li>c语言中 val % 2 等价于 val &amp; 1  val &amp; 3 = val % 4    val &amp; 7 = val % 8</li>
+<li>C语言运算符运行效率 位运算 &lt; 加减 &lt; 乘 &lt; 除 &lt; 取模</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">&#123;</span><br><span class="line">    j == <span class="number">0</span> || <span class="keyword">printf</span>(<span class="string">&quot; &quot;</span>); <span class="regexp">//</span>在行尾添加空格的方法</span><br><span class="line">    <span class="keyword">printf</span>(<span class="string">&quot;%d&quot;</span>, i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2021/03/28/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
