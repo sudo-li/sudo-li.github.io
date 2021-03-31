@@ -47,15 +47,15 @@
   };
 </script>
 
-  <meta name="description" content="质数筛查1234567891011121314151617181920212223242526272829303132#include &lt;stdio.h&gt;#include &lt;string.h&gt;int n &#x3D; 1000000;int mark[1000001];int main() &amp;#123;    int c;    int m;    memset(mark, 0,">
+  <meta name="description" content="质数筛查1234567891011121314151617181920212223242526272829303132#include &lt;stdio.h&gt;#include &lt;string.h&gt;int n &#x3D; 1000000;int mark[1000001];int main() &amp;#123;    int c;    int m;    memset(mark, 0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="质数筛查">
 <meta property="og:url" content="https://sudo-li.github.io/2021/03/29/%E8%B4%A8%E6%95%B0%E7%AD%9B%E6%9F%A5/index.html">
 <meta property="og:site_name" content="sudo-li">
-<meta property="og:description" content="质数筛查1234567891011121314151617181920212223242526272829303132#include &lt;stdio.h&gt;#include &lt;string.h&gt;int n &#x3D; 1000000;int mark[1000001];int main() &amp;#123;    int c;    int m;    memset(mark, 0,">
+<meta property="og:description" content="质数筛查1234567891011121314151617181920212223242526272829303132#include &lt;stdio.h&gt;#include &lt;string.h&gt;int n &#x3D; 1000000;int mark[1000001];int main() &amp;#123;    int c;    int m;    memset(mark, 0">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-29T09:43:13.000Z">
-<meta property="article:modified_time" content="2021-03-31T09:22:15.936Z">
+<meta property="article:modified_time" content="2021-03-31T09:37:25.693Z">
 <meta property="article:author" content="sudo-li">
 <meta name="twitter:card" content="summary">
 
@@ -240,7 +240,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-31 17:22:15" itemprop="dateModified" datetime="2021-03-31T17:22:15+08:00">2021-03-31</time>
+                <time title="修改时间：2021-03-31 17:37:25" itemprop="dateModified" datetime="2021-03-31T17:37:25+08:00">2021-03-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -295,6 +295,7 @@
       
         <span id="more"></span>
 
+<hr>
 <h1 id="质数筛查"><a href="#质数筛查" class="headerlink" title="质数筛查"></a>质数筛查</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">1000000</span>;</span><br><span class="line"><span class="keyword">int</span> mark[<span class="number">1000001</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">    <span class="keyword">int</span> m;</span><br><span class="line">    <span class="built_in">memset</span>(mark, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(mark));</span><br><span class="line">    mark[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    mark[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (c = <span class="number">2</span>; c * c &lt;= n; c++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (mark[c] != <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">2</span>; j &lt;= n / c; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                mark[c * j] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = m; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (mark[i] == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>对于n以内的筛选来说，如果n是和数，c为n的最小正因数，则有</p>
 <blockquote>
