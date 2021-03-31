@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>test</title>
-    <url>/2021/03/23/test/</url>
+    <url>/sudo-li/2021/03/23/test/</url>
     <content><![CDATA[<h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h1><p><code>djigegheijrhrh</code></p>
 <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">sgduw</span></span><br><span class="line"><span class="attribute">dgwrH</span></span><br><span class="line"><span class="attribute">RH</span></span><br><span class="line"><span class="attribute">RH</span></span><br><span class="line"><span class="attribute">H</span> </span><br></pre></td></tr></table></figure>
 <p><a href="www.baidu.com">baidu</a></p>
@@ -25,7 +25,7 @@
   </entry>
   <entry>
     <title>电子时钟</title>
-    <url>/2021/03/28/%E7%94%B5%E5%AD%90%E6%97%B6%E9%92%9F/</url>
+    <url>/sudo-li/2021/03/28/%E7%94%B5%E5%AD%90%E6%97%B6%E9%92%9F/</url>
     <content><![CDATA[<p>#基于stc51单片机的电子时钟设计</p>
 <span id="more"></span>
 
@@ -64,7 +64,7 @@
   </entry>
   <entry>
     <title>使用hexo搭建个人博客</title>
-    <url>/2021/01/29/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <url>/sudo-li/2021/01/29/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<p>#使用hexo搭建个人博客</p>
 <span id="more"></span>
 
@@ -114,7 +114,7 @@
   </entry>
   <entry>
     <title>Ubuntu20.04美化过程</title>
-    <url>/2021/03/28/ubuntu20.04%E7%BE%8E%E5%8C%96/</url>
+    <url>/sudo-li/2021/03/28/ubuntu20.04%E7%BE%8E%E5%8C%96/</url>
     <content><![CDATA[<h1 id="Ubuntu美化过程"><a href="#Ubuntu美化过程" class="headerlink" title="Ubuntu美化过程"></a>Ubuntu美化过程</h1><span id="more"></span>
 
 <h1 id="Ubuntu美化"><a href="#Ubuntu美化" class="headerlink" title="Ubuntu美化"></a>Ubuntu美化</h1><hr>
@@ -145,7 +145,7 @@
   </entry>
   <entry>
     <title>质数筛查</title>
-    <url>/2021/03/29/%E8%B4%A8%E6%95%B0%E7%AD%9B%E6%9F%A5/</url>
+    <url>/sudo-li/2021/03/29/%E8%B4%A8%E6%95%B0%E7%AD%9B%E6%9F%A5/</url>
     <content><![CDATA[<h1 id="质数筛查"><a href="#质数筛查" class="headerlink" title="质数筛查"></a>质数筛查</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">1000000</span>;</span><br><span class="line"><span class="keyword">int</span> mark[<span class="number">1000001</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">    <span class="keyword">int</span> m;</span><br><span class="line">    <span class="built_in">memset</span>(mark, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(mark));</span><br><span class="line">    mark[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    mark[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (c = <span class="number">2</span>; c * c &lt;= n; c++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (mark[c] != <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">2</span>; j &lt;= n / c; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                mark[c * j] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = m; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (mark[i] == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>对于n以内的筛选来说，如果n是和数，c为n的最小正因数，则有</p>
 <blockquote>
@@ -159,7 +159,7 @@
   </entry>
   <entry>
     <title>排序算法</title>
-    <url>/2021/03/29/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
+    <url>/sudo-li/2021/03/29/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="selector-tag">for</span> (m = <span class="number">0</span>; m &lt; n - i - <span class="number">1</span>; m++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="selector-tag">if</span> (numbers[m + <span class="number">1</span>] &gt; numbers[m])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="selector-tag">swap</span>(&amp;numbers[m], &amp;numbers[m + <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h1 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h1><figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">for (i = <span class="number">0</span>; i &lt; <span class="built_in">n</span> - <span class="number">1</span>; i++)</span><br><span class="line">&#123; </span><br><span class="line">    <span class="built_in">int</span> <span class="built_in">max</span> = i;</span><br><span class="line">    for (m = i + <span class="number">1</span>; m &lt; <span class="built_in">n</span>; m++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">if</span> (numbers[<span class="built_in">max</span>] &lt; numbers[m])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">max</span> = m;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">if</span>(i != <span class="built_in">max</span>)</span><br><span class="line">        swap(&amp;numbers[i], &amp;numbers[<span class="built_in">max</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -170,7 +170,7 @@
   </entry>
   <entry>
     <title>二分查找</title>
-    <url>/2021/03/29/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</url>
+    <url>/sudo-li/2021/03/29/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</url>
     <content><![CDATA[<figure class="highlight perl"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">while</span>(low &lt;= high)</span><br><span class="line">&#123;</span><br><span class="line">    mid = (low + high) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (numbers[mid] == m)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">printf</span>(<span class="string">&quot;%d&quot;</span>, mid + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (numbers[mid] &lt; m)</span><br><span class="line">    &#123;</span><br><span class="line">        low = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        high = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(low &gt; high)</span><br><span class="line">    <span class="keyword">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
@@ -179,7 +179,7 @@
   </entry>
   <entry>
     <title>第一天</title>
-    <url>/2021/03/29/%E7%AC%AC%E4%B8%80%E5%A4%A9/</url>
+    <url>/sudo-li/2021/03/29/%E7%AC%AC%E4%B8%80%E5%A4%A9/</url>
     <content><![CDATA[<h1 id="1-inttypes-h"><a href="#1-inttypes-h" class="headerlink" title="1.inttypes.h"></a>1.inttypes.h</h1><ul>
 <li>在C99中新添加的头文件  </li>
 <li>新增了 int8_t int16_t int32_t int64_t  </li>
@@ -205,7 +205,7 @@
   </entry>
   <entry>
     <title>Hello World</title>
-    <url>/2021/03/28/hello-world/</url>
+    <url>/sudo-li/2021/03/28/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><span id="more"></span>
 <h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
