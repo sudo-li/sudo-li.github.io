@@ -187,7 +187,7 @@
   <entry>
     <title>第一天</title>
     <url>/2021/03/29/%E7%AC%AC%E4%B8%80%E5%A4%A9/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<h1 id="第一天"><a href="#第一天" class="headerlink" title="第一天"></a>第一天</h1><span id="more"></span>
 
 <h1 id="1-inttypes-h"><a href="#1-inttypes-h" class="headerlink" title="1.inttypes.h"></a>1.inttypes.h</h1><ul>
 <li>在C99中新添加的头文件  </li>
