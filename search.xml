@@ -177,7 +177,8 @@
   <entry>
     <title>二分查找</title>
     <url>/2021/03/29/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<hr>
+<span id="more"></span>
 
 <figure class="highlight perl"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">while</span>(low &lt;= high)</span><br><span class="line">&#123;</span><br><span class="line">    mid = (low + high) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (numbers[mid] == m)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">printf</span>(<span class="string">&quot;%d&quot;</span>, mid + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (numbers[mid] &lt; m)</span><br><span class="line">    &#123;</span><br><span class="line">        low = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        high = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(low &gt; high)</span><br><span class="line">    <span class="keyword">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
 ]]></content>
